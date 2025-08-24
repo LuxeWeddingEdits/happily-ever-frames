@@ -60,10 +60,10 @@ const Portfolio = () => {
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-wedding-text mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-wedding-text mb-6 leading-tight">
             Our Portfolio
           </h2>
-          <p className="text-xl text-wedding-text-light max-w-2xl mx-auto mb-8">
+          <p className="text-lg sm:text-xl text-wedding-text-light max-w-2xl mx-auto mb-8 leading-relaxed">
             Discover the magic we create for couples around the world
           </p>
           
@@ -113,11 +113,11 @@ const Portfolio = () => {
                 </div>
               </div>
               
-              <div className="p-6">
-                <h3 className="text-lg font-heading font-semibold text-wedding-text mb-1">
+              <div className="p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-heading font-semibold text-wedding-text mb-1 leading-tight">
                   {item.title}
                 </h3>
-                <p className="text-wedding-text-light text-sm">
+                <p className="text-wedding-text-light text-xs sm:text-sm leading-relaxed">
                   {item.location}
                 </p>
               </div>

@@ -18,14 +18,14 @@ const Hero = () => {
       
       {/* Content */}
       <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 animate-fade-up">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 animate-fade-up leading-tight">
           Luxury Wedding Memories Through
           <span className="block hero-gradient bg-clip-text text-transparent">
             Perfect Edits
           </span>
         </h1>
         
-        <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-2xl mx-auto animate-fade-up [animation-delay:200ms]">
+        <p className="text-lg md:text-xl mb-8 text-white/90 max-w-2xl mx-auto animate-fade-up [animation-delay:200ms] leading-relaxed">
           Professional wedding photo and video editing that transforms your precious moments into timeless masterpieces
         </p>
         
@@ -41,18 +41,18 @@ const Hero = () => {
           </Button>
         </div>
         
-        <div className="mt-12 grid grid-cols-3 gap-8 text-center animate-fade-up [animation-delay:600ms]">
-          <div>
-            <div className="text-3xl font-heading font-bold hero-gradient bg-clip-text text-transparent">500+</div>
-            <div className="text-sm text-white/80">Weddings Edited</div>
+        <div className="mt-12 grid grid-cols-3 gap-4 sm:gap-8 text-center animate-fade-up [animation-delay:600ms]">
+          <div className="space-y-2">
+            <div className="text-2xl sm:text-3xl font-heading font-bold hero-gradient bg-clip-text text-transparent">500+</div>
+            <div className="text-xs sm:text-sm text-white/80 leading-snug">Weddings Edited</div>
           </div>
-          <div>
-            <div className="text-3xl font-heading font-bold hero-gradient bg-clip-text text-transparent">24h</div>
-            <div className="text-sm text-white/80">Quick Turnaround</div>
+          <div className="space-y-2">
+            <div className="text-2xl sm:text-3xl font-heading font-bold hero-gradient bg-clip-text text-transparent">24h</div>
+            <div className="text-xs sm:text-sm text-white/80 leading-snug">Quick Turnaround</div>
           </div>
-          <div>
-            <div className="text-3xl font-heading font-bold hero-gradient bg-clip-text text-transparent">4.9★</div>
-            <div className="text-sm text-white/80">Client Rating</div>
+          <div className="space-y-2">
+            <div className="text-2xl sm:text-3xl font-heading font-bold hero-gradient bg-clip-text text-transparent">4.9★</div>
+            <div className="text-xs sm:text-sm text-white/80 leading-snug">Client Rating</div>
           </div>
         </div>
       </div>

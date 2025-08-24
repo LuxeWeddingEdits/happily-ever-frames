@@ -48,10 +48,10 @@ const Careers = () => {
     <section id="careers" className="py-20 bg-background/50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-heading font-bold mb-6">
-            Join Our <span className="text-gradient">Creative Team</span>
+          <h2 className="text-3xl sm:text-4xl font-heading font-bold mb-6 leading-tight">
+            Join Our <span className="hero-gradient bg-clip-text text-transparent">Creative Team</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Be part of a passionate team dedicated to creating extraordinary wedding memories. 
             We offer competitive compensation, flexible remote work, and the opportunity to work on beautiful projects.
           </p>
@@ -62,22 +62,22 @@ const Careers = () => {
             <Card key={index} className="card-hover">
               <CardHeader>
                 <div className="flex justify-between items-start mb-2">
-                  <CardTitle className="text-xl font-heading">{job.title}</CardTitle>
-                  <span className="text-sm bg-primary/10 text-primary px-2 py-1 rounded">
+                  <CardTitle className="text-lg sm:text-xl font-heading leading-tight">{job.title}</CardTitle>
+                  <span className="text-xs sm:text-sm bg-primary/10 text-primary px-2 py-1 rounded">
                     {job.type}
                   </span>
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-xs sm:text-sm text-muted-foreground">
                   {job.department} • {job.location}
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-muted-foreground">{job.description}</p>
+                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">{job.description}</p>
                 <div>
-                  <h4 className="font-semibold mb-2">Requirements:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
+                  <h4 className="text-sm sm:text-base font-semibold mb-2">Requirements:</h4>
+                  <ul className="text-xs sm:text-sm text-muted-foreground space-y-1">
                     {job.requirements.map((req, idx) => (
-                      <li key={idx} className="flex items-start">
+                      <li key={idx} className="flex items-start leading-relaxed">
                         <span className="text-primary mr-2">•</span>
                         {req}
                       </li>
@@ -91,11 +91,11 @@ const Careers = () => {
         </div>
 
         <div className="text-center">
-          <Card className="max-w-2xl mx-auto p-8">
-            <h3 className="text-2xl font-heading font-bold mb-4">
+          <Card className="max-w-2xl mx-auto p-6 sm:p-8">
+            <h3 className="text-xl sm:text-2xl font-heading font-bold mb-4 leading-tight">
               Don't See Your Role?
             </h3>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
               We're always looking for talented individuals to join our team. 
               Send us your portfolio and let us know how you'd like to contribute to our mission.
             </p>

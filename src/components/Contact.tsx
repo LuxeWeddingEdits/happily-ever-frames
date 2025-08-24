@@ -11,10 +11,10 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Contact Info */}
           <div>
-            <h2 className="text-4xl md:text-5xl font-heading font-bold text-wedding-text mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-wedding-text mb-6 leading-tight">
               Let's Create Magic Together
             </h2>
-            <p className="text-xl text-wedding-text-light mb-8">
+            <p className="text-lg sm:text-xl text-wedding-text-light mb-8 leading-relaxed">
               Ready to transform your wedding memories? Get in touch and let's discuss how we can make your photos and videos extraordinary.
             </p>
             
@@ -24,8 +24,8 @@ const Contact = () => {
                   <Mail className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <div className="font-medium text-wedding-text">Email Us</div>
-                  <div className="text-wedding-text-light">hello@lenslove.com</div>
+                  <div className="font-medium text-wedding-text text-sm sm:text-base">Email Us</div>
+                  <div className="text-wedding-text-light text-sm sm:text-base">hello@luxeweddingedits.com</div>
                 </div>
               </div>
               
@@ -34,8 +34,8 @@ const Contact = () => {
                   <Phone className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <div className="font-medium text-wedding-text">Call Us</div>
-                  <div className="text-wedding-text-light">+1 (555) 123-4567</div>
+                  <div className="font-medium text-wedding-text text-sm sm:text-base">Call Us</div>
+                  <div className="text-wedding-text-light text-sm sm:text-base">+1 (555) 123-4567</div>
                 </div>
               </div>
               
@@ -44,8 +44,8 @@ const Contact = () => {
                   <MapPin className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <div className="font-medium text-wedding-text">Visit Us</div>
-                  <div className="text-wedding-text-light">123 Creative Street, Studio City, CA</div>
+                  <div className="font-medium text-wedding-text text-sm sm:text-base">Visit Us</div>
+                  <div className="text-wedding-text-light text-sm sm:text-base">123 Creative Street, Studio City, CA</div>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@ const Contact = () => {
 
           {/* Contact Form */}
           <Card className="p-8 shadow-card">
-            <h3 className="text-2xl font-heading font-semibold text-wedding-text mb-6">
+            <h3 className="text-xl sm:text-2xl font-heading font-semibold text-wedding-text mb-6 leading-tight">
               Get Your Free Quote
             </h3>
             

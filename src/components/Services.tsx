@@ -45,10 +45,10 @@ const Services = () => {
       <div className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-wedding-text mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-wedding-text mb-6 leading-tight">
             Our Services
           </h2>
-          <p className="text-xl text-wedding-text-light max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-wedding-text-light max-w-2xl mx-auto leading-relaxed">
             We specialize in transforming your wedding memories into stunning visual masterpieces
           </p>
         </div>
@@ -69,11 +69,11 @@ const Services = () => {
                 </div>
               </div>
               
-              <div className="p-8">
-                <h3 className="text-2xl font-heading font-semibold text-wedding-text mb-4">
+              <div className="p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-heading font-semibold text-wedding-text mb-4 leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-wedding-text-light mb-6">
+                <p className="text-wedding-text-light mb-6 leading-relaxed">
                   {service.description}
                 </p>
                 
@@ -101,10 +101,10 @@ const Services = () => {
               <div className="inline-flex items-center justify-center w-16 h-16 bg-wedding-gold rounded-full mb-4 group-hover:scale-110 transition-transform">
                 <benefit.icon className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-heading font-semibold text-wedding-text mb-2">
+              <h3 className="text-lg sm:text-xl font-heading font-semibold text-wedding-text mb-2 leading-tight">
                 {benefit.title}
               </h3>
-              <p className="text-wedding-text-light">
+              <p className="text-sm sm:text-base text-wedding-text-light leading-relaxed">
                 {benefit.description}
               </p>
             </div>
