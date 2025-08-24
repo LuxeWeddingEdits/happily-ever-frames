@@ -19,9 +19,9 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6 animate-fade-up">
-          Capture Your
+          Luxury Wedding Memories Through
           <span className="block hero-gradient bg-clip-text text-transparent">
-            Love Story
+            Perfect Edits
           </span>
         </h1>
         
