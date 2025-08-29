@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { User, Session, AuthError } from '@supabase/supabase-js'
-import { supabase } from '@/lib/supabase'
+import { supabase, isSupabaseConfigured } from '@/lib/supabase'
 
 interface AuthContextType {
   user: User | null
@@ -36,6 +36,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Check if Supabase is configured
+    if (!isSupabaseConfigured() || !supabase) {
+      console.warn('Supabase is not configured. Please connect your project to Supabase.')
+      setLoading(false)
+      return
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
@@ -56,6 +63,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   const signUp = async (email: string, password: string, fullName: string) => {
+    if (!isSupabaseConfigured() || !supabase) {
+      return { error: { message: 'Supabase is not configured. Please connect your project to Supabase.' } as AuthError }
+    }
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -69,6 +80,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const signIn = async (email: string, password: string) => {
+    if (!isSupabaseConfigured() || !supabase) {
+      return { error: { message: 'Supabase is not configured. Please connect your project to Supabase.' } as AuthError }
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password
@@ -77,10 +92,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const signOut = async () => {
+    if (!isSupabaseConfigured() || !supabase) {
+      return
+    }
     await supabase.auth.signOut()
   }
 
   const resendConfirmation = async (email: string) => {
+    if (!isSupabaseConfigured() || !supabase) {
+      return { error: { message: 'Supabase is not configured. Please connect your project to Supabase.' } as AuthError }
+    }
+
     const { error } = await supabase.auth.resend({
       type: 'signup',
       email

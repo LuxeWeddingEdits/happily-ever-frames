@@ -17,6 +17,8 @@ import * as z from "zod"
 import { useAuth } from "@/hooks/useAuth"
 import { toast } from "sonner"
 import { Loader2, Mail } from "lucide-react"
+import { isSupabaseConfigured } from "@/lib/supabase"
+import SupabaseConnectionNotice from "./SupabaseConnectionNotice"
 
 const signInSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -131,7 +133,17 @@ export default function AuthDialog({ children }: AuthDialogProps) {
         {children}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
-        {confirmationSent ? (
+        {!isSupabaseConfigured() ? (
+          <div className="space-y-4">
+            <DialogHeader>
+              <DialogTitle>Authentication Setup Required</DialogTitle>
+              <DialogDescription>
+                To use authentication features, you need to connect this project to Supabase.
+              </DialogDescription>
+            </DialogHeader>
+            <SupabaseConnectionNotice />
+          </div>
+        ) : confirmationSent ? (
           <div className="text-center space-y-4">
             <DialogHeader>
               <DialogTitle className="flex items-center justify-center gap-2">
