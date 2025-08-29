@@ -5,7 +5,11 @@ import { LogOut, User } from "lucide-react";
 import { toast } from "sonner";
 
 const Navigation = () => {
+  console.log('Navigation component rendering')
+  
   const { user, signOut, loading } = useAuth();
+
+  console.log('Navigation - Auth state:', { user: !!user, loading })
 
   const handleSignOut = async () => {
     await signOut();

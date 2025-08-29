@@ -35,7 +35,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
 
+  console.log('AuthProvider initialized')
+
   useEffect(() => {
+    console.log('AuthProvider useEffect running')
+    
     // Check if Supabase is configured
     if (!isSupabaseConfigured() || !supabase) {
       console.warn('Supabase is not configured. Please connect your project to Supabase.')
@@ -43,8 +47,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return
     }
 
+    console.log('Supabase is configured, setting up auth')
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('Initial session:', session)
       setSession(session)
       setUser(session?.user ?? null)
       setLoading(false)
@@ -53,6 +60,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
+        console.log('Auth state changed:', _event, session)
         setSession(session)
         setUser(session?.user ?? null)
         setLoading(false)
