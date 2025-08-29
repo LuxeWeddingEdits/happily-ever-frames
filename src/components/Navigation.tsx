@@ -1,6 +1,17 @@
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import AuthDialog from "@/components/auth/AuthDialog";
+import { LogOut, User } from "lucide-react";
+import { toast } from "sonner";
 
 const Navigation = () => {
+  const { user, signOut, loading } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out successfully!");
+  };
+
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 p-6">
       <div className="container mx-auto flex items-center justify-between">
@@ -20,9 +31,32 @@ const Navigation = () => {
           <a href="#careers" className="text-white hover:text-primary-light transition-colors">
             Careers
           </a>
-          <Button variant="elegant" size="sm">
-            Contact Us
-          </Button>
+          
+          {loading ? (
+            <div className="w-24 h-9 bg-white/20 rounded animate-pulse" />
+          ) : user ? (
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 text-white">
+                <User className="h-4 w-4" />
+                <span className="text-sm">{user.user_metadata?.full_name || user.email}</span>
+              </div>
+              <Button 
+                variant="elegant" 
+                size="sm" 
+                onClick={handleSignOut}
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign Out
+              </Button>
+            </div>
+          ) : (
+            <AuthDialog>
+              <Button variant="elegant" size="sm">
+                Sign In
+              </Button>
+            </AuthDialog>
+          )}
         </div>
       </div>
     </nav>
