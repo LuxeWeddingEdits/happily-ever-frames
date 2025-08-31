@@ -26,10 +26,24 @@ const signInSchema = z.object({
 })
 
 const signUpSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
+  email: z.string()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address")
+    .refine((email) => {
+      // More strict email validation
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+      return emailRegex.test(email)
+    }, "Please enter a valid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
   confirmPassword: z.string(),
-  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  fullName: z.string()
+    .min(2, "Full name is required")
+    .refine((name) => {
+      // Ensure full name has at least first and last name
+      const trimmedName = name.trim()
+      const nameParts = trimmedName.split(/\s+/)
+      return nameParts.length >= 2 && nameParts.every(part => part.length > 0)
+    }, "Please enter your full name (first and last name)"),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -198,7 +212,12 @@ export default function AuthDialog({ children }: AuthDialogProps) {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your email" type="email" {...field} />
+                          <Input 
+                            placeholder="Enter your email" 
+                            type="email" 
+                            autoComplete="email"
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -211,7 +230,12 @@ export default function AuthDialog({ children }: AuthDialogProps) {
                       <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your password" type="password" {...field} />
+                          <Input 
+                            placeholder="Enter your password" 
+                            type="password" 
+                            autoComplete="current-password"
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -243,7 +267,11 @@ export default function AuthDialog({ children }: AuthDialogProps) {
                       <FormItem>
                         <FormLabel>Full Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your full name" {...field} />
+                          <Input 
+                            placeholder="Enter your full name" 
+                            autoComplete="off"
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -256,7 +284,12 @@ export default function AuthDialog({ children }: AuthDialogProps) {
                       <FormItem>
                         <FormLabel>Email</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter your email" type="email" {...field} />
+                          <Input 
+                            placeholder="Enter your email" 
+                            type="email" 
+                            autoComplete="off"
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -269,7 +302,12 @@ export default function AuthDialog({ children }: AuthDialogProps) {
                       <FormItem>
                         <FormLabel>Password</FormLabel>
                         <FormControl>
-                          <Input placeholder="Create a password" type="password" {...field} />
+                          <Input 
+                            placeholder="Create a password" 
+                            type="password" 
+                            autoComplete="new-password"
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -282,7 +320,12 @@ export default function AuthDialog({ children }: AuthDialogProps) {
                       <FormItem>
                         <FormLabel>Confirm Password</FormLabel>
                         <FormControl>
-                          <Input placeholder="Confirm your password" type="password" {...field} />
+                          <Input 
+                            placeholder="Confirm your password" 
+                            type="password" 
+                            autoComplete="new-password"
+                            {...field} 
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
