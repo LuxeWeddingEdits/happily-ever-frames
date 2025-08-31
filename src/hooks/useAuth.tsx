@@ -75,10 +75,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       return { error: { message: 'Supabase is not configured. Please connect your project to Supabase.' } as AuthError }
     }
 
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return { error: { message: 'Please enter a valid email address' } as AuthError }
+    }
+
+    const redirectUrl = `${window.location.origin}/`
+    
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
+        emailRedirectTo: redirectUrl,
         data: {
           full_name: fullName
         }

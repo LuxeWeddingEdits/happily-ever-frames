@@ -1,10 +1,95 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
+
+const contactSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  email: z.string().email("Please enter a valid email address"),
+  weddingDate: z.string().optional(),
+  serviceNeeded: z.string().min(1, "Please select a service"),
+  projectDescription: z.string().optional()
+})
+
+type ContactFormData = z.infer<typeof contactSchema>
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false)
+  const { user } = useAuth()
+  
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      weddingDate: "",
+      serviceNeeded: "Photo Editing",
+      projectDescription: ""
+    }
+  })
+
+  const handleSubmit = async (data: ContactFormData) => {
+    setLoading(true)
+    
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert({
+          first_name: data.firstName,
+          last_name: data.lastName,
+          email: data.email,
+          wedding_date: data.weddingDate || null,
+          service_needed: data.serviceNeeded,
+          project_description: data.projectDescription || null,
+          user_id: user?.id || null
+        })
+      
+      if (error) {
+        toast.error("Failed to submit your request. Please try again.")
+        console.error("Submission error:", error)
+      } else {
+        toast.success("Your quote request has been submitted successfully! We'll get back to you soon.")
+        form.reset()
+        
+        // Send admin notification
+        try {
+          await supabase.functions.invoke('notify-admin', {
+            body: {
+              type: 'contact_submission',
+              data: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                weddingDate: data.weddingDate,
+                serviceNeeded: data.serviceNeeded,
+                projectDescription: data.projectDescription
+              }
+            }
+          })
+        } catch (notifyError) {
+          console.log("Admin notification failed:", notifyError)
+          // Don't show error to user as main submission was successful
+        }
+      }
+    } catch (err) {
+      toast.error("An unexpected error occurred. Please try again.")
+      console.error("Unexpected error:", err)
+    }
+    
+    setLoading(false)
+  }
+
   return (
     <section className="py-20 elegant-gradient">
       <div className="container mx-auto px-6">
@@ -57,62 +142,123 @@ const Contact = () => {
               Get Your Free Quote
             </h3>
             
-            <form className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-wedding-text mb-2 block">
-                    First Name
-                  </label>
-                  <Input placeholder="Your first name" />
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-wedding-text">
+                          First Name *
+                        </FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your first name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-wedding-text">
+                          Last Name *
+                        </FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your last name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-wedding-text mb-2 block">
-                    Last Name
-                  </label>
-                  <Input placeholder="Your last name" />
-                </div>
-              </div>
-              
-              <div>
-                <label className="text-sm font-medium text-wedding-text mb-2 block">
-                  Email
-                </label>
-                <Input type="email" placeholder="your@email.com" />
-              </div>
-              
-              <div>
-                <label className="text-sm font-medium text-wedding-text mb-2 block">
-                  Wedding Date
-                </label>
-                <Input type="date" />
-              </div>
-              
-              <div>
-                <label className="text-sm font-medium text-wedding-text mb-2 block">
-                  Service Needed
-                </label>
-                <select className="w-full p-3 border border-input rounded-md bg-background text-wedding-text">
-                  <option>Photo Editing</option>
-                  <option>Video Editing</option>
-                  <option>Both Photo & Video</option>
-                </select>
-              </div>
-              
-              <div>
-                <label className="text-sm font-medium text-wedding-text mb-2 block">
-                  Tell us about your project
-                </label>
-                <Textarea 
-                  placeholder="Describe your vision, style preferences, and any special requirements..."
-                  rows={4}
+                
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-wedding-text">
+                        Email *
+                      </FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="your@email.com" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              
-              <Button variant="default" size="lg" className="w-full group">
-                Send Message
-                <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </form>
+                
+                <FormField
+                  control={form.control}
+                  name="weddingDate"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-wedding-text">
+                        Wedding Date
+                      </FormLabel>
+                      <FormControl>
+                        <Input type="date" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="serviceNeeded"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-wedding-text">
+                        Service Needed *
+                      </FormLabel>
+                      <FormControl>
+                        <select 
+                          className="w-full p-3 border border-input rounded-md bg-background text-wedding-text"
+                          {...field}
+                        >
+                          <option value="Photo Editing">Photo Editing</option>
+                          <option value="Video Editing">Video Editing</option>
+                          <option value="Both Photo & Video">Both Photo & Video</option>
+                        </select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="projectDescription"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm font-medium text-wedding-text">
+                        Tell us about your project
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Describe your vision, style preferences, and any special requirements..."
+                          rows={4}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button type="submit" variant="default" size="lg" className="w-full group" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Send Message
+                  <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </form>
+            </Form>
           </Card>
         </div>
       </div>
