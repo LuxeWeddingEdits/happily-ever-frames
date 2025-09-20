@@ -4,7 +4,7 @@ import heroImage from "@/assets/hero-wedding.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img 
@@ -17,7 +17,7 @@ const Hero = () => {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto mt-8 sm:mt-0">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6 animate-fade-up leading-tight">
           Luxury Wedding Memories Through
           <span className="block hero-gradient bg-clip-text text-transparent">
