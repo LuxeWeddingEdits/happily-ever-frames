@@ -15,7 +15,7 @@ const Portfolio = () => {
     },
     {
       id: 2,
-      type: "video",
+      type: "photo",
       title: "Emma & James",
       location: "Coastal Ceremony",
       image: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&h=400&fit=crop",
@@ -31,7 +31,7 @@ const Portfolio = () => {
     },
     {
       id: 4,
-      type: "video",
+      type: "photo",
       title: "Anna & Robert",
       location: "Mountain Wedding",
       image: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&h=400&fit=crop",
@@ -47,7 +47,7 @@ const Portfolio = () => {
     },
     {
       id: 6,
-      type: "video",
+      type: "photo",
       title: "Sophie & Alex",
       location: "Beach Ceremony",
       image: "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?w=600&h=400&fit=crop",
@@ -69,8 +69,9 @@ const Portfolio = () => {
           
           <div className="flex justify-center gap-4 mb-8">
             <Button variant="default" size="sm">All</Button>
-            <Button variant="ghost" size="sm">Photos</Button>
-            <Button variant="ghost" size="sm">Videos</Button>
+            <Button variant="ghost" size="sm">Portraits</Button>
+            <Button variant="ghost" size="sm">Ceremonies</Button>
+            <Button variant="ghost" size="sm">Receptions</Button>
           </div>
         </div>
 
@@ -91,18 +92,13 @@ const Portfolio = () => {
                     <Button size="icon" variant="elegant" className="rounded-full">
                       <Eye className="h-4 w-4" />
                     </Button>
-                    {item.type === "video" && (
-                      <Button size="icon" variant="hero" className="rounded-full">
-                        <Play className="h-4 w-4" />
-                      </Button>
-                    )}
                   </div>
                 </div>
 
                 {/* Type Badge */}
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 bg-wedding-gold text-white text-xs font-medium rounded-full">
-                    {item.type === "video" ? "Video" : "Photo"}
+                    Photo
                   </span>
                 </div>
 

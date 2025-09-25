@@ -82,13 +82,13 @@ const About = () => {
               Crafting Timeless Wedding Memories
             </h3>
             <p className="text-wedding-text-light mb-6 leading-relaxed">
-              Every love story is unique, and we believe your wedding photos and videos should reflect that. 
+              Every love story is unique, and we believe your wedding photos should reflect that. 
               Our team of skilled editors combines technical expertise with artistic vision to transform 
-              your raw footage into cinematic masterpieces.
+              your raw photos into stunning masterpieces.
             </p>
             <p className="text-wedding-text-light mb-6 leading-relaxed">
-              From subtle color corrections to dramatic cinematic effects, we work closely with photographers 
-              and videographers worldwide to ensure every frame captures the emotion and beauty of your special day.
+              From subtle color corrections to dramatic artistic effects, we work closely with photographers 
+              worldwide to ensure every image captures the emotion and beauty of your special day.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button variant="default" size="lg">

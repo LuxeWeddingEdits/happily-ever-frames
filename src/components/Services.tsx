@@ -1,24 +1,30 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Camera, Video, Palette, Clock, Award, Heart } from "lucide-react";
+import { Camera, Palette, Clock, Award, Heart, Image } from "lucide-react";
 import photoEditingImage from "@/assets/photo-editing.jpg";
-import videoEditingImage from "@/assets/video-editing.jpg";
 
 const Services = () => {
   const services = [
     {
       icon: Camera,
-      title: "Photo Editing",
-      description: "Professional retouching, color correction, and artistic enhancement for your wedding photos",
+      title: "Wedding Photo Editing",
+      description: "Professional retouching, color correction, and artistic enhancement to make your wedding photos absolutely stunning",
       image: photoEditingImage,
-      features: ["Color Correction", "Skin Retouching", "Background Enhancement", "Artistic Filters"]
+      features: ["Color Correction", "Skin Retouching", "Background Enhancement", "Lighting Adjustment"]
     },
     {
-      icon: Video,
-      title: "Video Editing",
-      description: "Cinematic wedding videos with seamless transitions, music synchronization, and storytelling",
-      image: videoEditingImage,
-      features: ["Cinematic Editing", "Color Grading", "Audio Mixing", "Special Effects"]
+      icon: Image,
+      title: "Portrait Enhancement",
+      description: "Specialized portrait editing to enhance the natural beauty of couples and wedding party members",
+      image: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&h=400&fit=crop",
+      features: ["Portrait Retouching", "Expression Enhancement", "Blemish Removal", "Eye Brightening"]
+    },
+    {
+      icon: Palette,
+      title: "Artistic Photo Effects",
+      description: "Creative photo editing with artistic filters and effects to give your photos a unique, dreamy look",
+      image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&h=400&fit=crop",
+      features: ["Vintage Effects", "Black & White", "Soft Focus", "Creative Filters"]
     }
   ];
 
@@ -54,7 +60,7 @@ const Services = () => {
         </div>
 
         {/* Main Services */}
-        <div className="grid md:grid-cols-2 gap-12 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {services.map((service, index) => (
             <Card key={index} className="overflow-hidden shadow-card hover-lift group">
               <div className="relative h-64 overflow-hidden">
@@ -69,7 +75,7 @@ const Services = () => {
                 </div>
               </div>
               
-              <div className="p-6 sm:p-8">
+              <div className="p-4 sm:p-6">
                 <h3 className="text-xl sm:text-2xl font-heading font-semibold text-wedding-text mb-4 leading-tight">
                   {service.title}
                 </h3>

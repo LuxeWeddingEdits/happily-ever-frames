@@ -26,7 +26,7 @@ const Hero = () => {
         </h1>
         
         <p className="text-lg md:text-xl mb-8 text-white/90 max-w-2xl mx-auto animate-fade-up [animation-delay:200ms] leading-relaxed">
-          Professional wedding photo and video editing that transforms your precious moments into timeless masterpieces
+          Professional wedding photo editing that transforms your precious moments into timeless masterpieces
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up [animation-delay:400ms]">

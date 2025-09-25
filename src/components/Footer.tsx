@@ -11,7 +11,7 @@ const Footer = () => {
               LensLove
             </div>
             <p className="text-white/80 mb-6 max-w-md">
-              We're passionate about preserving your most precious moments through expert photo and video editing. Every love story deserves to be told beautifully.
+              We're passionate about preserving your most precious moments through expert photo editing. Every love story deserves to be told beautifully.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-wedding-gold transition-colors">

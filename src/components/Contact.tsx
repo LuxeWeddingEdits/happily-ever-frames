@@ -100,7 +100,7 @@ const Contact = () => {
               Let's Create Magic Together
             </h2>
             <p className="text-lg sm:text-xl text-wedding-text-light mb-8 leading-relaxed">
-              Ready to transform your wedding memories? Get in touch and let's discuss how we can make your photos and videos extraordinary.
+              Ready to transform your wedding memories? Get in touch and let's discuss how we can make your photos extraordinary.
             </p>
             
             <div className="space-y-6">
@@ -223,8 +223,8 @@ const Contact = () => {
                           {...field}
                         >
                           <option value="Photo Editing">Photo Editing</option>
-                          <option value="Video Editing">Video Editing</option>
-                          <option value="Both Photo & Video">Both Photo & Video</option>
+                          <option value="Portrait Enhancement">Portrait Enhancement</option>
+                          <option value="Artistic Effects">Artistic Effects</option>
                         </select>
                       </FormControl>
                       <FormMessage />
